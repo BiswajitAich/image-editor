@@ -1,8 +1,14 @@
+"use client"
 import React, { useState, useEffect } from "react";
 import RangeSlider from "../RangeSlider/page";
 import styles from '../../styles/imageCompressor.module.css'
 
-const ImageCompressor: React.FC<{ sendCompressorData: (data: number) => void; range: number }> = ({ sendCompressorData, range }) => {
+interface ImageCompressorProps {
+  sendCompressorData: (data: number) => void;
+  range: number;
+} 
+
+const ImageCompressor: React.FC<ImageCompressorProps> = ({ sendCompressorData, range }) => {
   const [rangeValue, setRangeValue] = useState<number>(range);
 
   useEffect(() => {
@@ -18,7 +24,7 @@ const ImageCompressor: React.FC<{ sendCompressorData: (data: number) => void; ra
       <h3>compressor</h3>
       <div>
         <div>
-          <RangeSlider sendData={handleRange} min={0} max={100} val={rangeValue} />
+          <RangeSlider sendRangeData={handleRange} min={0} max={100} val={rangeValue} />
         </div>
       </div>
     </div>

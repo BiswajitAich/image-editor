@@ -2,8 +2,11 @@
 import React from "react"
 import styles from "../../styles/inputImage.module.css";
 
+interface InputImageProps {
+  inputImageData: (data : FileList) => void
+}
 
-const MainEditer: React.FC<{inputImageData: (data: FileList) => void}> = ({inputImageData}) => {
+const InputImage: React.FC<InputImageProps> = ({inputImageData}) => {
     const handleImageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if(files) {
@@ -33,4 +36,4 @@ const MainEditer: React.FC<{inputImageData: (data: FileList) => void}> = ({input
         </div>
       );
     };
-export default MainEditer
+export default InputImage

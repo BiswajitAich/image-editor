@@ -27,25 +27,22 @@ const MainEditer: React.FC = () => {
     } else setDisplay(component);
   };
 
-  const handleFormatData = (data: any) => {
-    if (data !== null) setFormat(data);
-
+  const handleFormatData = (data: string) => {
+    setFormat(data);
   }
 
   const handleCompressData = (data: any) => {
-    if (data !== null) setRangeValue(data);
-    console.log(images)
+    setRangeValue(data);
   }
 
   const InputImageData = (data: any) => {
-    if (data !== null) setImages(data);
+    setImages(data);
   }
 
   const handleRemoveImage = (indexToRemove: number) => {
     if (images) {
       const updatedImages = Array.from(images).filter((_, index) => index !== indexToRemove);
       setImages(updatedImages);
-      console.log(images)
     }
   };
 
@@ -76,8 +73,8 @@ const MainEditer: React.FC = () => {
         const ctx = canvas.getContext('2d');
         canvas.width = imgWidth;
         canvas.height = imgHeight;
-if(ctx)
-        ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
+        if (ctx)
+          ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
         const num = (100 - rangeValue) / 100;
 
         const downloadLink = document.createElement('a');
@@ -122,13 +119,13 @@ if(ctx)
 
           <div>
             {display === "A" ? (
-              <ImageCompressor sendCompressorData={handleCompressData} range={rangeValue}/>
+              <ImageCompressor sendCompressorData={handleCompressData} range={rangeValue} />
             ) : null}
           </div>
 
           <div>
             {display === "B" ? (
-              <ChangeImageFormat sendData={handleFormatData} />
+              <ChangeImageFormat sendFormatData={handleFormatData} />
             ) : null}
           </div>
           {/* 

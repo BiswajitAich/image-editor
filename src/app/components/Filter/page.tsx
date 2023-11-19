@@ -1,26 +1,30 @@
-import React,{ useState } from "react"
-import RangeSlider from "../RangeSlider/page"
+import React from "react"
+// import RangeSlider from "../RangeSlider/page"
 
 
-const Filter: React.FC=({filterData}) =>{
-const [contrastValue, setContrastValue] = useState<number>(0)
-const [brightnessValue, setBrightnessValue] = useState<number>(50)
+const Filter: React.FC=() =>{
+
+// {filterData}
+
+
+// const [contrastValue, setContrastValue] = useState<number>(0)
+// const [brightnessValue, setBrightnessValue] = useState<number>(50)
 
   
-const contrastData=(data: number)=>{
-  setContrastValue(parseInt(data, 10));
+// const contrastData=(data: number)=>{
+//   setContrastValue(parseInt(data, 10));
   
-}
-const brightnessData=(data: number)=>{
-    setBrightnessValue(parseInt(data, 10));
+// }
+// const brightnessData=(data: number)=>{
+//     setBrightnessValue(parseInt(data, 10));
   
-}
+// }
 
 
   
   return (
     <div>
-      <div>
+      {/* <div>
     <h4>contrast</h4>
         <RangeSlider sendData={contrastData} min={0} max={100} val={contrastValue}/>
     </div>
@@ -34,7 +38,7 @@ const brightnessData=(data: number)=>{
 
       
       <div>{contrastValue}</div>
-      <div>{brightnessValue}</div>
+      <div>{brightnessValue}</div> */}
     </div>
   )
 }
