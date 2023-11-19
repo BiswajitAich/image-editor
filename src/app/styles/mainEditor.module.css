@@ -1,0 +1,137 @@
+.header {
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+    background-color: rgba(0, 37, 52, 0.5);
+}
+
+.header button {
+    background-color: transparent;
+    color: antiquewhite;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}
+
+.options {
+    position: fixed;
+    padding: 5px 0;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    background-color: black;
+}
+
+.options button {
+    color: gold;
+    background-color: transparent;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+.options button:hover {
+    border: 1px solid gold;
+    background-color: rgb(255, 217, 0, 0.3);
+}
+
+.body{
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 100px;
+}
+
+.card{
+    width: 85%;
+    min-height: 80vh;
+    box-shadow: 0px 0px 1pc rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    overflow: auto;
+}
+
+.changes{
+    position: fixed;
+    width: 80%;
+    bottom: 46px;
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.8);
+    left: 50%;
+    transform: translate(-50%, 0);
+    height: auto;
+    overflow: auto;
+}
+
+.imageCardBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.imageCardBody h2{
+    width: 100%;
+    background-color: steelblue;
+    padding: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.imageCardBody h2 button{
+    padding: 5px;
+    border: 1px solid transparent;
+    transition: all 0.5s ease-in-out;
+
+}
+
+.imageCardBody h2 button:hover{
+    background-color: lightseagreen;
+    color: aliceblue;
+    border: 1px solid black;
+}
+
+.imageCard{
+    background-color: lightsteelblue;
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    overflow: auto;
+}
+
+.imageCard button{
+    padding: 5px;
+    transition: all 0.5s ease-in-out;
+    border: 1px solid transparent;
+    border-radius: 2px;
+}
+
+.imageCard button:hover{
+    background-color: lightseagreen;
+    color: aliceblue;
+    border: 1px solid black;
+}
+
+.changedDetails{
+    width: 100%;
+    background-color: rgba(210, 105, 30, 0.8);
+    text-shadow: 1px 1px 1px whitesmoke;
+}
+
+.changedDetails div{
+    padding: 5px;
+    margin: 5px;
+}

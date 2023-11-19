@@ -1,0 +1,27 @@
+.inputImageBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+    flex-direction: column;
+}
+
+.inputDiv{
+    width: 80%;
+    aspect-ratio: 1/1;
+    max-height: 50vh;
+    border: 1px solid cyan;
+    box-shadow: 0 0 1pc rgb(0, 255, 255, 0.3);
+    background-color: rgb(199, 255, 236);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputDiv input{
+    color: seagreen;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

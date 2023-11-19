@@ -1,0 +1,25 @@
+.changeImageFormatDiv{
+    padding: 5px;
+}
+
+.changeImageFormatDiv h3{
+    background-color: black;
+    padding: 5px;
+}
+
+.changeImageFormatDiv div{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10%;
+}
+
+.changeImageFormatDiv div button{
+    padding: 5px;
+    border: 2px solid black;    
+    transition: all 0.5s ease-in-out;
+}
+
+.changeImageFormatDiv div button:hover{
+    background-color:firebrick;
+    color: beige;
+}
