@@ -10,7 +10,7 @@ import InputImage from "../components/InputImage/page"
 
 const MainEditer: React.FC = () => {
   const [display, setDisplay] = useState<string | null>(null);
-  const [format, setFormat] = useState<string | null>("jpeg")
+  const [format, setFormat] = useState<string | undefined >("jpeg")
   const [rangeValue, setRangeValue] = useState<number>(80);
   const [images, setImages] = useState<File[]>([]);
 
@@ -27,7 +27,7 @@ const MainEditer: React.FC = () => {
     } else setDisplay(component);
   };
 
-  const handleFormatData = (data: string) => {
+  const handleFormatData = (data: string):void => {
     setFormat(data);
   }
 
@@ -51,22 +51,27 @@ const MainEditer: React.FC = () => {
     setImages([])
   };
 
-  const handleDovnloadAllImages = (e: any) => {
+  const handleDovnloadAllImages = async (e: any) => {
     e.preventDefault();
-
-    images.forEach((images, index) => {
-      handleDownloadImage(index);
-    })
-
+  
+    if(images) {
+      const imgNum = images.length;
+      for(let i = 0; i<imgNum; i++)
+      handleDownloadImage(i);
+    }
   };
-
-  const handleDownloadImage = (indexToDownload: number) => {
+    
+  const handleDownloadImage = async  (indexToDownload: number) => {
     if (images) {
       const img = new Image();
 
       img.src = URL.createObjectURL(images[indexToDownload]);
 
-      img.onload = () => {
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = reject;
+      });
+      
         const imgHeight = img.naturalHeight;
         const imgWidth = img.naturalWidth;
         const canvas = document.createElement('canvas');
@@ -83,7 +88,7 @@ const MainEditer: React.FC = () => {
         downloadLink.download = `edited-image.${format}`;
         downloadLink.click();
 
-      }
+      
     }
   };
 
@@ -184,3 +189,4 @@ const MainEditer: React.FC = () => {
   )
 }
 export default MainEditer
+

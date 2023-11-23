@@ -1,3 +1,4 @@
+// components/ChangeImageFormat.tsx
 import React from "react";
 import styles from '../../styles/changeImageFormat.module.css';
 
@@ -15,16 +16,32 @@ const ChangeImageFormat: React.FC<ChangeImageFormatProps> = ({ sendFormatData })
       <h3>Choose Image format to convert</h3>
       <div>
         <div>
-          <button onClick={() => handleFormatData("jpeg")}>jpeg</button>
+          {typeof window !== 'undefined' ? (
+            <button onClick={() => handleFormatData("jpeg")}>jpeg</button>
+          ) : (
+            <p>Rendering on the server, button disabled</p>
+          )}
         </div>
         <div>
-          <button onClick={() => handleFormatData("webp")}>webp</button>
+          {typeof window !== 'undefined' ? (
+            <button onClick={() => handleFormatData("webp")}>webp</button>
+          ) : (
+            <p>Rendering on the server, button disabled</p>
+          )}
         </div>
         <div>
-          <button onClick={() => handleFormatData("png")}>png</button>
+          {typeof window !== 'undefined' ? (
+            <button onClick={() => handleFormatData("png")}>png</button>
+          ) : (
+            <p>Rendering on the server, button disabled</p>
+          )}
         </div>
         <div>
-          <button onClick={() => handleFormatData("svg+xml")}>svg or svg+xml</button>
+          {typeof window !== 'undefined' ? (
+            <button onClick={() => handleFormatData("svg+xml")}>svg or svg+xml</button>
+          ) : (
+            <p>Rendering on the server, button disabled</p>
+          )}
         </div>
       </div>
     </div>
