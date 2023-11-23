@@ -15,7 +15,7 @@ const Home: React.FC = () => {
 
   return (
     <main className={styles.main}>
-      <h2>FREE FOR ALL USSERS</h2>
+      <h2>FREE FOR ALL USERS</h2>
       <div >
       <h1>BEST QUALITY IMAGE</h1>
       <p style={{fontSize: '20px'}}>COMPRESS AND FORMAT CONVERTION</p>

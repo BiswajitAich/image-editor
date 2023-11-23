@@ -87,8 +87,9 @@ const MainEditer: React.FC = () => {
 
         downloadLink.download = `edited-image.${format}`;
         downloadLink.click();
+        document.body.removeChild(downloadLink);
+        document.body.removeChild(canvas)
 
-      
     }
   };
 
@@ -177,8 +178,8 @@ const MainEditer: React.FC = () => {
         {
           images.length > 0 ? (
             <div className={styles.changedDetails}>
-              <div>Expected Image Format to be Downloaded in : {format}</div>
-              <div>Expected Image Compress : {rangeValue} %</div>
+              <div>Expected Image Format to be Downloaded in : <p> {format}</p></div>
+              <div>Expected Image Compress : <p> {rangeValue} %</p> </div>
             </div>
           ) : null
         }

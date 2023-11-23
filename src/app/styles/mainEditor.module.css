@@ -2,7 +2,7 @@
     width: 100%;
     padding: 5px 0;
     text-align: center;
-    background-color: rgba(0, 37, 52, 0.5);
+    background-color: rgb(0 37 52);
 }
 
 .header button {
@@ -58,6 +58,7 @@
     box-shadow: 0px 0px 1pc rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .changes{
@@ -127,15 +128,23 @@
 
 .changedDetails{
     width: 100%;
-    background-color: rgba(210, 105, 30, 0.8);
+    background-color: rgba(255, 99, 71, 0.9);
     text-shadow: 1px 1px 1px whitesmoke;
 }
 
 .changedDetails div{
+    display: flex;
     padding: 5px;
     margin: 5px;
 }
 
+.changedDetails div p{
+    background: rgba(245, 245, 245, 0.8);
+    padding: 2px;
+    font-weight: 500;
+    min-width: 100px;
+    text-align: center;
+}
 @media screen and (max-width: 500px) {
     .card{
         width: 100%;
