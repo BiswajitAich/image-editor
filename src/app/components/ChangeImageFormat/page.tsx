@@ -48,4 +48,4 @@ const ChangeImageFormat: React.FC<ChangeImageFormatProps> = ({ sendFormatData })
   );
 };
 
-export { ChangeImageFormat };
+export default ChangeImageFormat;
