@@ -150,3 +150,17 @@
         width: 100%;
     }
 }
+
+
+.notice{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: black;
+    color: antiquewhite;
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}

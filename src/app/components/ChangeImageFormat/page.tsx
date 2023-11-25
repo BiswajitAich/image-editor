@@ -43,6 +43,13 @@ const ChangeImageFormat: React.FC<ChangeImageFormatProps> = ({ sendFormatData })
             <p>Rendering on the server, button disabled</p>
           )}
         </div>
+        <div>
+          {typeof window !== 'undefined' ? (
+            <button onClick={() => handleFormatData("x-icon")}>icon (.ico)</button>
+          ) : (
+            <p>Rendering on the server, button disabled</p>
+          )}
+        </div>
       </div>
     </div>
   );

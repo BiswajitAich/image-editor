@@ -10,9 +10,10 @@ import InputImage from "../components/InputImage/page"
 
 const MainEditer: React.FC = () => {
   const [display, setDisplay] = useState<string | null>(null);
-  const [format, setFormat] = useState<string | undefined >("jpeg")
+  const [format, setFormat] = useState<string | undefined>("jpeg")
   const [rangeValue, setRangeValue] = useState<number>(80);
   const [images, setImages] = useState<File[]>([]);
+  const [showNotice, setShowNotice] = useState(false);
 
   const router = useRouter();
 
@@ -22,12 +23,24 @@ const MainEditer: React.FC = () => {
   };
 
   const handleComponentChange = (component: string) => {
-    if (component === "X") {
-      setDisplay(null);
-    } else setDisplay(component);
+
+    if (images.length <= 0) {
+      setShowNotice(true);
+
+      setTimeout(() => {
+        setShowNotice(false);
+      }, 3000);
+    }
+
+    if (images.length > 0) {
+      if (component === "X") {
+        setDisplay(null);
+      } else setDisplay(component);
+    }
+
   };
 
-  const handleFormatData = (data: string):void => {
+  const handleFormatData = (data: string): void => {
     setFormat(data);
   }
 
@@ -43,25 +56,27 @@ const MainEditer: React.FC = () => {
     if (images) {
       const updatedImages = Array.from(images).filter((_, index) => index !== indexToRemove);
       setImages(updatedImages);
+      setDisplay(null);
     }
   };
 
   const handleRemoveAllImages = (e: any) => {
     e.preventDefault();
-    setImages([])
+    setImages([]);
+    setDisplay(null);
   };
 
   const handleDovnloadAllImages = async (e: any) => {
     e.preventDefault();
-  
-    if(images) {
+
+    if (images) {
       const imgNum = images.length;
-      for(let i = 0; i<imgNum; i++)
-      handleDownloadImage(i);
+      for (let i = 0; i < imgNum; i++)
+        handleDownloadImage(i);
     }
   };
-    
-  const handleDownloadImage = async  (indexToDownload: number) => {
+
+  const handleDownloadImage = async (indexToDownload: number) => {
     if (images) {
       const img = new Image();
 
@@ -71,26 +86,32 @@ const MainEditer: React.FC = () => {
         img.onload = resolve;
         img.onerror = reject;
       });
-      
-        const imgHeight = img.naturalHeight;
-        const imgWidth = img.naturalWidth;
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = imgWidth;
-        canvas.height = imgHeight;
-        if (ctx)
-          ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
-        const num = (100 - rangeValue) / 100;
 
-        const downloadLink = document.createElement('a');
-        downloadLink.href = canvas.toDataURL(`image/${format}`, num);
+      const imgHeight = img.naturalHeight;
+      const imgWidth = img.naturalWidth;
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = imgWidth;
+      canvas.height = imgHeight;
+      if (ctx)
+        ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
+      const num = (100 - rangeValue) / 100;
 
-        downloadLink.download = `edited-image.${format}`;
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        document.body.removeChild(canvas)
+      const downloadLink = document.createElement('a');
+      downloadLink.href = canvas.toDataURL(`image/${format}`, num);
+
+      downloadLink.download = `edited-image.${format}`;
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      document.body.removeChild(canvas)
 
     }
+  };
+
+
+  const buttonStyle = {
+    color: images.length <= 0 ? "#ffd70091" : "",
+    backgroundColor: images.length <= 0 ? "#cdc38a3b" : "",
   };
 
 
@@ -102,11 +123,15 @@ const MainEditer: React.FC = () => {
 
       <div className={styles.options}>
 
-        <button onClick={() => handleComponentChange("A")}>
+        <button onClick={() => handleComponentChange("A")}
+          style={buttonStyle}
+        >
           Compress
         </button>
 
-        <button onClick={() => handleComponentChange("B")}>
+        <button onClick={() => handleComponentChange("B")}
+          style={buttonStyle}
+        >
           format
         </button>
 
@@ -183,8 +208,7 @@ const MainEditer: React.FC = () => {
             </div>
           ) : null
         }
-
-
+        {showNotice && <p className={styles.notice}>No image is uploaded. <br /> Please upload an image first !</p>}
       </div>
     </div>
   )

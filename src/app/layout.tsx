@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: "My Website Description",
     siteName: "Free image editor tool",
     images: [{
-      url: "",
+      url: "../../public/logo.png",
     }],
   }
 };
