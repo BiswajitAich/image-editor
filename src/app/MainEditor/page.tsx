@@ -125,12 +125,14 @@ const MainEditer: React.FC = () => {
 
         <button onClick={() => handleComponentChange("A")}
           style={buttonStyle}
+          disabled={!showNotice}
         >
           Compress
         </button>
 
         <button onClick={() => handleComponentChange("B")}
           style={buttonStyle}
+          disabled={!showNotice}
         >
           format
         </button>
@@ -139,7 +141,10 @@ const MainEditer: React.FC = () => {
           Filter
         </button> */}
 
-        <button onClick={() => handleComponentChange("X")} style={{ minWidth: '40px' }}>
+        <button onClick={() => handleComponentChange("X")} 
+          style={{ minWidth: '40px' }}
+          disabled={!showNotice}
+          >
           &darr;
         </button>
 
