@@ -6,6 +6,7 @@ import ImageCompressor from "../components/ImageCompressor/page"
 import { useRouter } from 'next/navigation';
 import styles from "../styles/mainEditor.module.css";
 import InputImage from "../components/InputImage/page"
+import ChangeImageSize from "../components/ChangeImageSize/page";
 
 
 const MainEditer: React.FC = () => {
@@ -14,8 +15,27 @@ const MainEditer: React.FC = () => {
   const [rangeValue, setRangeValue] = useState<number>(80);
   const [images, setImages] = useState<File[]>([]);
   const [showNotice, setShowNotice] = useState(false);
+  const [h, setH] = useState<number | null>(null);
+  const [w, setW] = useState<number | null>(null);
+
 
   const router = useRouter();
+
+  const setNaturalSize = () => {
+    if (images.length === 1 && h === null && w === null) {
+      const img = new Image();
+      img.src = URL.createObjectURL(images[0]);
+      img.onload = () => {
+        const naturalH: number = img.naturalHeight;
+        const naturalW: number = img.naturalWidth;
+        console.log('Natural Height:', naturalH);
+        console.log('Natural Width:', naturalW);
+        setH(naturalH);
+        setW(naturalW);
+      };
+
+    }
+  };
 
 
   const handleGoToHome = () => {
@@ -35,6 +55,9 @@ const MainEditer: React.FC = () => {
     if (images.length > 0) {
       if (component === "X") {
         setDisplay(null);
+      } else if (component === "D") {
+        setDisplay(component);
+        setNaturalSize();
       } else setDisplay(component);
     }
 
@@ -76,35 +99,36 @@ const MainEditer: React.FC = () => {
     }
   };
 
-  const handleDownloadImage = async (indexToDownload: number) => {
+  const handleDownloadImage = (indexToDownload: number) => {
     if (images) {
       const img = new Image();
 
       img.src = URL.createObjectURL(images[indexToDownload]);
 
-      await new Promise((resolve, reject) => {
-        img.onload = resolve;
-        img.onerror = reject;
-      });
+      img.onload = () => {
 
-      const imgHeight = img.naturalHeight;
-      const imgWidth = img.naturalWidth;
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = imgWidth;
-      canvas.height = imgHeight;
-      if (ctx)
-        ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
-      const num = (100 - rangeValue) / 100;
 
-      const downloadLink = document.createElement('a');
-      downloadLink.href = canvas.toDataURL(`image/${format}`, num);
+        const imgHeight = images.length === 1 ? h : img.naturalHeight;
+        const imgWidth = images.length === 1 ? w : img.naturalWidth;
 
-      downloadLink.download = `edited-image.${format}`;
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-      document.body.removeChild(canvas)
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (imgHeight && imgWidth) {
+          canvas.width = imgWidth;
+          canvas.height = imgHeight;
+          if (ctx)
+            ctx.drawImage(img, 0, 0, imgWidth, imgHeight);
+          const num = (100 - rangeValue) / 100;
 
+          const downloadLink = document.createElement('a');
+          downloadLink.href = canvas.toDataURL(`image/${format}`, num);
+
+          downloadLink.download = `edited-image.${format}`;
+          downloadLink.click();
+          if (downloadLink) document.body.removeChild(downloadLink);
+          if (canvas) document.body.removeChild(canvas)
+        }
+      }
     }
   };
 
@@ -141,10 +165,17 @@ const MainEditer: React.FC = () => {
           Filter
         </button> */}
 
-        <button onClick={() => handleComponentChange("X")} 
+        {images.length === 1 ? (<button onClick={() => handleComponentChange("D")}
+          style={buttonStyle}
+        >
+          Size
+        </button>) : null
+        }
+
+        <button onClick={() => handleComponentChange("X")}
           style={{ minWidth: '40px' }}
           disabled={showNotice}
-          >
+        >
           &darr;
         </button>
 
@@ -171,6 +202,17 @@ const MainEditer: React.FC = () => {
             ) : null}
           </div> 
           */}
+
+          <div>
+            {display === "D" && images.length === 1 ? (
+              <ChangeImageSize
+                h={h}
+                w={w}
+                sendH={(data) => setH(data)}
+                sendW={(data) => setW(data)}
+              />
+            ) : null}
+          </div>
 
         </div>
         {images.length > 0 ? (
@@ -210,9 +252,18 @@ const MainEditer: React.FC = () => {
             <div className={styles.changedDetails}>
               <div>Expected Image Format to be Downloaded in : <p> {format}</p></div>
               <div>Expected Image Compress : <p> {rangeValue} %</p> </div>
+
+              {images.length === 1 && h !== null && w !== null ? (
+                <>
+                  <div>Expected Image Height : <p> {h} px</p> </div>
+                  <div>Expected Image Width : <p> {w} px</p> </div>
+                </>
+              ) : null}
+
             </div>
           ) : null
         }
+
         {showNotice && <p className={styles.notice}>No image is uploaded. <br /> Please upload an image first !</p>}
       </div>
     </div>

@@ -1,4 +1,4 @@
-.inputImageBody{
+.inputImageBody {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -7,7 +7,7 @@
     flex-direction: column;
 }
 
-.inputDiv{
+.inputDiv {
     width: 80%;
     aspect-ratio: 1/1;
     max-height: 50vh;
@@ -20,8 +20,45 @@
     align-items: center;
 }
 
-.inputDiv input{
+.inputDiv input {
     color: cyan;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.sizeInput {
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    font-family: fantasy;
+}
+
+.sizeInput input{
+    padding: 2px;
+    font-weight: 500;
+    font-size: large;
+    text-align: center;
+    color: indigo;
+    border-radius: 2px;
+    width: 80%;
+}
+
+.sizeInput button{
+    padding: 5px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50% , 0);
+    width: 100px;
+    background-color: rgba(81, 168, 139, 0.5);
+    color: aqua;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.sizeInput button:hover{
+    color: rgb(204, 255, 237);
+    background-color: black;
+}
