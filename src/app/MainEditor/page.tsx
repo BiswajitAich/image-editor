@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import ChangeImageFormat from "../components/ChangeImageFormat/page"
 import ImageCompressor from "../components/ImageCompressor/page"
 // import Filter from "../components/Filter/page"
@@ -20,6 +20,11 @@ const MainEditer: React.FC = () => {
 
 
   const router = useRouter();
+
+  useEffect(()=>{
+    if(images.length===1)
+    setNaturalSize();
+  },[images])
 
   const setNaturalSize = () => {
     if (images.length === 1 && h === null && w === null) {
