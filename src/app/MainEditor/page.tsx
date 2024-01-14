@@ -128,7 +128,9 @@ const MainEditer: React.FC = () => {
           const downloadLink = document.createElement('a');
           downloadLink.href = canvas.toDataURL(`image/${format}`, num);
 
-          downloadLink.download = `edited-image.${format}`;
+          let date = new Date();
+          date = date.toISOString().replace(/[-:T.Z]/g, '');
+          downloadLink.download = `EDITED-IMG${date}.${format}`;
           downloadLink.click();
           if (downloadLink) document.body.removeChild(downloadLink);
           if (canvas) document.body.removeChild(canvas)
