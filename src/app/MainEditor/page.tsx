@@ -209,10 +209,9 @@ const MainEditer: React.FC = () => {
             ) : null}
           </div> 
           */}
-
+{/*{display === "D" && images.length === 1 ? (*/}
           <div>
-            {display === "D" ? (
-      {/*{display === "D" && images.length === 1 ? (*/}
+            {display === "D" ? ( 
               <ChangeImageSize
                 h={h}
                 w={w}
