@@ -17,8 +17,6 @@ const MainEditer: React.FC = () => {
   const [showNotice, setShowNotice] = useState(false);
   const [h, setH] = useState<number | null>(null);
   const [w, setW] = useState<number | null>(null);
-  const [imgNaturalHeight, setImgNaturalHeight] = useState<number | null>(null);
-  const [imgNaturalWidth, setImgNaturalWidth] = useState<number | null>(null);
   const [conformationDisplay, setConformationDisplay] = useState<boolean>(true);
 
 
