@@ -26,13 +26,13 @@ const ChangeImageSize: React.FC<ChangeImageSizeProps> = ({ h, w, sendH, sendW })
 
     const handleHeight = (e: React.ChangeEvent<HTMLInputElement>) => {
         const height = parseInt(e.target.value, 10);
-        setHeight(isNaN(height) ? 1 : height);
-        sendH(isNaN(height) ? 1 : height);
+        setHeight(height);
+        sendH(height);
     }
     const handleWidth = (e: React.ChangeEvent<HTMLInputElement>) => {
         const width = parseInt(e.target.value, 10);
-        setWidth(isNaN(width) ? 1 : width);
-        sendW(isNaN(width) ? 1 : width);
+        setWidth(width);
+        sendW(width);
     }
 
     const handleReset = () => {
@@ -48,14 +48,14 @@ const ChangeImageSize: React.FC<ChangeImageSizeProps> = ({ h, w, sendH, sendW })
             <input
                 type="number"
                 min="1"
-                value={height === null ? 1 : height}
+                value={Number(height) <= 5 ? 5 : Number(height)}
                 onChange={handleHeight}
             />
             <div>width: {width} px</div>
             <input
                 type="number"
                 min="1"
-                value={width === null ? 1 : width}
+                value={Number(width) <= 5 ? 5 : Number(width)}
                 onChange={handleWidth}
             />
             <button onClick={handleReset} >Reset</button>
